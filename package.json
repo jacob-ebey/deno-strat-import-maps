@@ -5,12 +5,15 @@
   "license": "",
   "scripts": {
     "build": "remix build",
-    "dev:remix": "remix watch",
+    "dev": "NODE_ENV=development npm run build && run-p dev:*",
+    "dev:remix": "NODE_ENV=development remix watch",
+    "dev:deno": "deno run --watch=./build/index.js --import-map=import_map_dev.json --allow-net --allow-read ./server.ts",
     "start": "deno run --import-map=import_map.json --allow-net --allow-read ./server.ts"
   },
   "dependencies": {},
   "devDependencies": {
-    "@remix-run/dev": "0.0.0-experimental-ba58f0f6"
+    "@remix-run/dev": "0.0.0-experimental-ba58f0f6",
+    "npm-run-all": "^4.1.5"
   },
   "engines": {
     "node": ">=14"

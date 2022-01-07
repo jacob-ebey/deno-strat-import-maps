@@ -7,7 +7,6 @@ export default function Index() {
   React.useEffect(() => {
     (async () => {
       const mod = await import("react-confetti");
-      console.log(mod);
       setConfetti(mod.default);
     })();
   }, []);
