@@ -1,6 +1,3 @@
-/**
- * @type {import('@remix-run/dev/config').AppConfig}
- */
 module.exports = {
   appDirectory: "app",
   assetsBuildDirectory: "public/build",
@@ -10,5 +7,6 @@ module.exports = {
   ignoredRouteFiles: [".*"],
   serverModuleFormat: "esm",
   serverPlatform: "neutral",
-  importMap: "./import_map.json"
+  importMapFile: "import_map.json",
+  bundleImportMap: true,
 };

@@ -1,9 +1,8 @@
 import * as React from "react";
+import type ConfettiType from "react-confetti";
 
 export default function Index() {
-  const [Confetti, setConfetti] = React.useState<React.ComponentType<{
-    recycle?: boolean;
-  }> | null>(null);
+  const [Confetti, setConfetti] = React.useState<typeof ConfettiType | null>(null);
 
   React.useEffect(() => {
     (async () => {
