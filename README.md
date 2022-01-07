@@ -7,7 +7,7 @@
 - Node.js
 - Deno
 
-## Development (no reloading for now, it's coming)
+## Development
 
 From your terminal:
 
@@ -16,6 +16,38 @@ npm i
 ```
 
 ```sh
-npm run build && npm start
+npm run dev
 ```
 
+This starts your app in development mode, rebuilding assets on file changes.
+
+## Deployment
+
+First, build your app for production:
+
+```sh
+npm i
+```
+
+```sh
+npm run build
+```
+
+Then run the app in production mode:
+
+```sh
+npm start
+```
+
+Now you'll need to pick a host to deploy it to.
+
+### DIY
+
+If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
+
+Make sure to deploy the output of `remix build`
+
+- `build/`
+- `public/build/`
+
+Along with your server entry `server.ts`
