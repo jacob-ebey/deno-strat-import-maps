@@ -1,5 +1,3 @@
-import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
-
 import { createRequestHandlerWithStaticFiles } from "@remix-run/deno";
 
 // @ts-ignore
@@ -10,5 +8,23 @@ const remixHandler = createRequestHandlerWithStaticFiles({
   mode: "production",
 });
 
-console.log("Started on http://localhost:8000");
-serve(remixHandler);
+const listener = Deno.listen({ port: 8000 });
+
+console.log("Server starting on http://localhost:8000");
+
+for await (const conn of listener) {
+  (async () => {
+    const requests = Deno.serveHttp(conn);
+
+    for await (const request of requests) {
+      try {
+        await request.respondWith(await remixHandler(request.request));
+      } catch (error) {
+        console.error(error);
+        await request.respondWith(
+          new Response("Internal Server Error", { status: 500 })
+        );
+      }
+    }
+  })();
+}

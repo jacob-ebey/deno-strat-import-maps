@@ -29,12 +29,12 @@ FROM denoland/deno:1.16.4
 RUN mkdir /app/
 WORKDIR /app/
 
-ADD server.ts ./
+ADD import_map.json server.ts ./
 
-COPY --from=build /app/dist /app/dist
+COPY --from=build /app/build /app/build
 COPY --from=build /app/public /app/public
 
-RUN deno cache ./dist/entry.js
+RUN deno cache --import-map=import_map.json ./server.ts
 
 EXPOSE 8000
-CMD ["run", "--import-map=import_map.json", "--allow-net", "--allow-read", "./server.ts"]
+CMD ["run", "--unstable", "--import-map=import_map.json", "--allow-net", "--allow-read", "./server.ts"]
