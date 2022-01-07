@@ -37,4 +37,4 @@ COPY --from=build /app/public /app/public
 RUN deno cache --import-map=import_map.json ./server.ts
 
 EXPOSE 8000
-CMD ["run", "--unstable", "--import-map=import_map.json", "--allow-net", "--allow-read", "./server.ts"]
+CMD ["run", "--import-map=import_map.json", "--allow-net", "--allow-read", "./server.ts"]
